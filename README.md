@@ -100,7 +100,14 @@
     python manage.py migrate
     ```
 
-6.  **開発サーバーを起動します**
+6.  **(任意) 管理者アカウントを作成します**
+    管理画面 (`/admin`) にアクセスしてデータを管理したい場合は、以下のコマンドでスーパーユーザーを作成します。
+    ```bash
+    python manage.py createsuperuser
+    ```
+    プロンプトに従ってユーザー名とパスワードを設定してください。
+
+7.  **開発サーバーを起動します**
     ```bash
     python manage.py runserver
     ```
