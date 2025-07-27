@@ -58,8 +58,8 @@
 
 1.  **リポジトリをクローンします**
     ```bash
-    git clone <repository-url>
-    cd <repository-name>
+    git clone https://github.com/bb-engineer2018/Inventory_Management_django.git
+    cd Inventory_Management_django
     ```
 
 2.  **仮想環境を作成して有効化します**
