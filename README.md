@@ -56,30 +56,51 @@
 
 ## セットアップと起動方法
 
+**前提条件:** このシステムを実行するには、お使いのPCに **Python 3** がインストールされている必要があります。
+
 1.  **リポジトリをクローンします**
     ```bash
     git clone https://github.com/bb-engineer2018/Inventory_Management_django.git
     cd Inventory_Management_django
     ```
 
-2.  **仮想環境を作成して有効化します**
+2.  **仮想環境を作成します**
     ```bash
     python3 -m venv venv
-    source venv/bin/activate
     ```
-    *Windowsの場合は、`venv\Scripts\activate` を使用します。*
 
-3.  **必要なライブラリをインストールします**
+3.  **仮想環境を有効化（activate）します**
+    お使いのターミナルに合わせて、以下のいずれかのコマンドを実行してください。
+
+    *   **macOS / Linux (ターミナル):**
+        ```bash
+        source venv/bin/activate
+        ```
+
+    *   **Windows (コマンドプロンプト):**
+        ```batch
+        venv\Scripts\activate.bat
+        ```
+
+    *   **Windows (PowerShell):**
+        ```powershell
+        # もしスクリプト実行が無効になっている場合は、先に以下のコマンドを実行してください。
+        # Set-ExecutionPolicy RemoteSigned -Scope Process
+        venv\Scripts\Activate.ps1
+        ```
+    コマンドが成功すると、プロンプトの先頭に `(venv)` と表示されます。
+
+4.  **必要なライブラリをインストールします**
     ```bash
     pip install -r requirements.txt
     ```
 
-4.  **データベースをマイグレートします**
+5.  **データベースをマイグレートします**
     ```bash
     python manage.py migrate
     ```
 
-5.  **開発サーバーを起動します**
+6.  **開発サーバーを起動します**
     ```bash
     python manage.py runserver
     ```
@@ -90,8 +111,8 @@
     python manage.py runserver 8001
     ```
 
-6.  **ブラウザでアクセスします**
-    [http://127.0.0.1:8000/](http://127.0.0.1:8000/) (または指定したポート)
+7.  **ブラウザでアクセスします**
+    [http://1.0.0.1:8000/](http://127.0.0.1:8000/) (または指定したポート)
 
 **注意:**
 
