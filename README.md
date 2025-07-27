@@ -54,21 +54,46 @@
 *   `db.sqlite3`: データベースファイル
 *   `manage.py`: Djangoプロジェクトの管理用スクリプト
 
-## 起動方法
+## セットアップと起動方法
 
-1.  ターミナルを開きます。
-2.  プロジェクトのルートディレクトリに移動し、仮想環境をアクティベートしてDjango開発サーバーを起動します。
-
+1.  **リポジトリをクローンします**
     ```bash
-    cd "/Users/bb_engineer/Desktop/物品管理" && source venv/bin/activate && python manage.py runserver 8001
+    git clone <repository-url>
+    cd <repository-name>
     ```
 
-3.  ブラウザで以下のURLにアクセスします。
+2.  **仮想環境を作成して有効化します**
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate
+    ```
+    *Windowsの場合は、`venv\Scripts\activate` を使用します。*
 
-    [http://127.0.0.1:8001/](http://127.0.0.1:8001/)
+3.  **必要なライブラリをインストールします**
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4.  **データベースをマイグレートします**
+    ```bash
+    python manage.py migrate
+    ```
+
+5.  **開発サーバーを起動します**
+    ```bash
+    python manage.py runserver
+    ```
+    デフォルトでは、サーバーは `http://127.0.0.1:8000/` で起動します。
+
+    別のポートを指定したい場合は、以下のようにします。
+    ```bash
+    python manage.py runserver 8001
+    ```
+
+6.  **ブラウザでアクセスします**
+    [http://127.0.0.1:8000/](http://127.0.0.1:8000/) (または指定したポート)
 
 **注意:**
 
-*   もしポート8001が既に使用されているというエラーが出た場合は、`python manage.py runserver` の後に別のポート番号（例: 8002）を指定してください。
 *   サーバーを停止するには、ターミナルで `Ctrl + C` を押します。
 
