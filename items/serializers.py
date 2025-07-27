@@ -22,6 +22,16 @@ class OrderSerializer(serializers.ModelSerializer):
         model = Order
         fields = '__all__'
 
+    def validate(self, data):
+        # 新規作成時のみ重複チェックを行う
+        if self.instance is None:
+            item = data.get('item')
+            order_date = data.get('order_date')
+
+            if Order.objects.filter(item=item, order_date=order_date).exists():
+                raise serializers.ValidationError('同じ物品が同じ日付で既に注文されています。')
+        return data
+
 class DeliveredOrderSerializer(serializers.ModelSerializer):
     item_name = serializers.CharField(source='item.name', read_only=True)
 

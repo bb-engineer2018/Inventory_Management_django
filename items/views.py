@@ -94,6 +94,12 @@ class OrderViewSet(viewsets.ModelViewSet):
         order.delete()
         return Response(status=status.HTTP_200_OK)
 
+    @action(detail=True, methods=['delete'])
+    def delete_order(self, request, pk=None):
+        order = self.get_object()
+        order.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
+
 class DeliveredOrderViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = DeliveredOrder.objects.all()
     serializer_class = DeliveredOrderSerializer

@@ -1,0 +1,11 @@
+1. ターミナルを開きます。
+
+2. プロジェクトのルートディレクトリに移動し、仮想環境をアクティベートしてDjango開発サーバーを起動します。
+   cd "/Users/bb_engineer/Desktop/物品管理" && source venv/bin/activate && python manage.py runserver 8001
+
+3. ブラウザで以下のURLにアクセスします。
+   http://127.0.0.1:8001/
+
+注意:
+- もしポート8001が既に使用されているというエラーが出た場合は、`python manage.py runserver` の後に別のポート番号（例: 8002）を指定してください。
+- サーバーを停止するには、ターミナルで `Ctrl + C` を押します。

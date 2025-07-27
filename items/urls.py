@@ -11,6 +11,7 @@ router.register(r'delivered-orders', views.DeliveredOrderViewSet)
 
 urlpatterns = [
     path("api/", include(router.urls)),
+    path("api/orders/<int:pk>/delete_order/", views.OrderViewSet.as_view({'delete': 'delete_order'}), name='order-delete'),
     path("", views.index, name="index"),
     path("item-master/", views.item_master, name="item_master"),
     path("order-delivery-confirmation/", views.order_delivery_confirmation, name="order_delivery_confirmation"),

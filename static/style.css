@@ -223,6 +223,8 @@ form {
 .data-table td button {
     margin-right: 5px;
     white-space: nowrap;
+    padding: 5px 10px; /* ボタンのパディングを小さくする */
+    font-size: 0.85em; /* フォントサイズを小さくする */
 }
 
 .suggestions-box {

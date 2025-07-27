@@ -80,7 +80,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 selectedItemIdInput.value = ''; // 選択された物品IDをクリア
             } else {
                 const errorData = await response.json();
-                messageElement.textContent = `発注失敗: ${JSON.stringify(errorData)}`;
+                let errorMessage = '発注失敗: ';
+                if (errorData.non_field_errors && Array.isArray(errorData.non_field_errors) && errorData.non_field_errors.length > 0) {
+                    errorMessage += errorData.non_field_errors[0];
+                } else if (errorData.detail) {
+                    errorMessage += errorData.detail;
+                } else {
+                    errorMessage += JSON.stringify(errorData);
+                }
+                messageElement.textContent = errorMessage;
                 messageElement.style.color = 'red';
             }
         } catch (error) {

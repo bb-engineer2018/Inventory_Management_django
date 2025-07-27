@@ -87,3 +87,23 @@
     <script src="{% static 'order_delivery_confirmation.js' %}"></script>
 </body>
 </html>
+
+<!-- 編集モーダル -->
+<div id="edit-order-modal" class="modal">
+    <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>注文編集</h2>
+        <form id="edit-order-form">
+            <input type="hidden" id="edit-order-id">
+            <div class="form-group">
+                <label for="edit-order-item-name">物品名:</label>
+                <input type="text" id="edit-order-item-name" readonly>
+            </div>
+            <div class="form-group">
+                <label for="edit-order-quantity">注文数:</label>
+                <input type="number" id="edit-order-quantity" name="order_quantity" required min="1">
+            </div>
+            <button type="submit" class="button primary">更新</button>
+        </form>
+    </div>
+</div>

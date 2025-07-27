@@ -11,6 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const pendingOrdersTableBody = document.querySelector('#pending-orders-table tbody');
     const deliveredOrdersTableBody = document.querySelector('#delivered-orders-table tbody');
 
+    // 編集モーダル関連要素
+    const editOrderModal = document.getElementById('edit-order-modal');
+    const closeEditOrderButton = editOrderModal.querySelector('.close-button');
+    const editOrderForm = document.getElementById('edit-order-form');
+    const editOrderIdInput = document.getElementById('edit-order-id');
+    const editOrderItemNameInput = document.getElementById('edit-order-item-name');
+    const editOrderQuantityInput = document.getElementById('edit-order-quantity');
+
     const pendingOrdersMessageElement = document.createElement('p');
     pendingOrdersMessageElement.id = 'pending-orders-message';
     pendingOrdersTableBody.parentNode.insertBefore(pendingOrdersMessageElement, pendingOrdersTableBody);
@@ -181,6 +189,37 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 });
                 actionsCell.appendChild(deliverButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = '削除';
+                deleteButton.classList.add('button', 'danger');
+                deleteButton.addEventListener('click', async () => {
+                    if (confirm(`注文ID ${order.id} を削除しますか？`)) {
+                        try {
+                            const response = await fetch(`/api/orders/${order.id}/delete_order/`, {
+                                method: 'DELETE',
+                                headers: { 'X-CSRFToken': getCookie('csrftoken') }
+                            });
+                            if (response.ok) {
+                                alert('注文が削除されました。');
+                                fetchOrderDeliveryData();
+                            } else {
+                                const errorData = await response.json();
+                                alert(`削除失敗: ${errorData.error || response.statusText}`);
+                            }
+                        } catch (error) {
+                            console.error('注文削除エラー:', error);
+                            alert('注文削除中にエラーが発生しました。');
+                        }
+                    }
+                });
+                actionsCell.appendChild(deleteButton);
+
+                const editButton = document.createElement('button');
+                editButton.textContent = '編集';
+                editButton.classList.add('button', 'secondary');
+                editButton.addEventListener('click', () => openEditOrderModal(order));
+                actionsCell.appendChild(editButton);
             });
         }
     }
@@ -247,4 +286,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 初期データの読み込み
     fetchOrderDeliveryData();
+
+    // 編集モーダルを開く
+    function openEditOrderModal(order) {
+        editOrderIdInput.value = order.id;
+        editOrderItemNameInput.value = order.item_name;
+        editOrderQuantityInput.value = order.order_quantity;
+        editOrderModal.style.display = 'block';
+    }
+
+    // 編集モーダルを閉じる
+    closeEditOrderButton.addEventListener('click', () => {
+        editOrderModal.style.display = 'none';
+    });
+
+    window.addEventListener('click', (event) => {
+        if (event.target === editOrderModal) {
+            editOrderModal.style.display = 'none';
+        }
+    });
+
+    // 編集フォームの送信
+    editOrderForm.addEventListener('submit', async (event) => {
+        event.preventDefault();
+
+        const orderId = editOrderIdInput.value;
+        const newQuantity = editOrderQuantityInput.value;
+
+        try {
+            const response = await fetch(`/api/orders/${orderId}/`, {
+                method: 'PATCH', // 部分更新のためPATCHを使用
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': getCookie('csrftoken')
+                },
+                body: JSON.stringify({ order_quantity: parseInt(newQuantity) })
+            });
+
+            if (response.ok) {
+                alert('注文数が更新されました。');
+                editOrderModal.style.display = 'none';
+                fetchOrderDeliveryData(); // リストを再読み込み
+            } else {
+                const errorData = await response.json();
+                alert(`更新失敗: ${errorData.error || response.statusText}`);
+            }
+        } catch (error) {
+            console.error('注文更新エラー:', error);
+            alert('注文更新中にエラーが発生しました。');
+        }
+    });
 });
