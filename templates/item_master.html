@@ -1,0 +1,111 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物品マスタ - 物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>物品マスタ</h1>
+        <a href="/">メインメニューに戻る</a>
+    </header>
+
+    <div class="container">
+        <main>
+            <!-- フィルタリング機能 -->
+            <section id="filter-section" class="card">
+                <h2>物品検索フィルタ</h2>
+                <form id="item-filter-form">
+                    <div class="form-group">
+                        <label for="item-search">物品名で絞り込み:</label>
+                        <input type="text" id="item-search" placeholder="物品名を検索">
+                        <input type="hidden" id="selected-item-id">
+                        <div id="item-suggestions" class="suggestions-box"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="button primary">適用</button>
+                        <button type="button" id="reset-item-filters" class="button secondary">リセット</button>
+                        <button type="button" id="show-all-items" class="button info">全部表示</button>
+                    </div>
+                </form>
+            </section>
+
+            <!-- 物品マスタ -->
+            <section id="items-section" class="card">
+                <h2>物品マスタ一覧</h2>
+                <div class="table-responsive">
+                    <table id="items-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>物品名</th>
+                                <th>納入業者</th>
+                                <th>規格</th>
+                                <th>単位</th>
+                                <th>入数</th>
+                                <th>保管場所</th>
+                                <th>管理方法</th>
+                                <th>納入価格</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- データはJSで挿入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- 編集モーダル -->
+    <div id="edit-item-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h2>物品編集</h2>
+            <form id="edit-item-form">
+                <input type="hidden" id="edit-item-id">
+                <div class="form-group">
+                    <label for="edit-name">物品名:</label>
+                    <input type="text" id="edit-name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="edit-supplier">納入業者:</label>
+                    <input type="text" id="edit-supplier" name="supplier">
+                </div>
+                <div class="form-group">
+                    <label for="edit-standard">規格:</label>
+                    <input type="text" id="edit-standard" name="standard">
+                </div>
+                <div class="form-group">
+                    <label for="edit-unit">単位:</label>
+                    <input type="text" id="edit-unit" name="unit">
+                </div>
+                <div class="form-group">
+                    <label for="edit-quantity_per_pack">入数:</label>
+                    <input type="number" id="edit-quantity_per_pack" name="quantity_per_pack">
+                </div>
+                <div class="form-group">
+                    <label for="edit-storage_location">保管場所:</label>
+                    <input type="text" id="edit-storage_location" name="storage_location">
+                </div>
+                <div class="form-group">
+                    <label for="edit-management_method">管理方法:</label>
+                    <select id="edit-management_method" name="management_method" required>
+                        <!-- オプションはJSで動的に読み込む -->
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="edit-delivery_price">納入価格:</label>
+                    <input type="number" step="0.01" id="edit-delivery_price" name="delivery_price">
+                </div>
+                <button type="submit" class="button primary">更新</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="{% static 'item_master.js' %}"></script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>削除済み物品 - 物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>削除済み物品</h1>
+        <a href="/">メインメニューに戻る</a>
+    </header>
+
+    <div class="container">
+        <main>
+            <!-- フィルタリング機能 -->
+            <section id="filter-section" class="card">
+                <h2>削除済み物品フィルタ</h2>
+                <form id="deleted-item-filter-form">
+                    <div class="form-group">
+                        <label for="deleted-item-search">物品名で絞り込み:</label>
+                        <input type="text" id="deleted-item-search" placeholder="物品名を入力">
+                        <input type="hidden" id="selected-deleted-item-id">
+                        <div id="deleted-item-suggestions" class="suggestions-box"></div>
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="button primary">適用</button>
+                        <button type="button" id="show-all-deleted-items" class="button info">全部表示</button>
+                    </div>
+                </form>
+            </section>
+
+            <section id="deleted-items-section" class="card">
+                <h2>削除済み物品一覧</h2>
+                <div class="table-responsive">
+                    <table id="deleted-items-table" class="data-table">
+                        <thead>
+                            <tr>
+                                <th>物品名</th>
+                                <th>納入業者</th>
+                                <th>規格</th>
+                                <th>単位</th>
+                                <th>入数</th>
+                                <th>保管場所</th>
+                                <th>管理方法</th>
+                                <th>納入価格</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <!-- データはJSで挿入 -->
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="{% static 'deleted_items.js' %}"></script>
+</body>
+</html>

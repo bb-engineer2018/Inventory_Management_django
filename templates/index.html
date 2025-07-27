@@ -1,0 +1,20 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h1>物品管理システム</h1>
+        <p class="description">以下のメニューから操作を選択してください。</p>
+        <nav id="main-menu-nav">
+            <!-- Menu items will be inserted here by main_menu.js -->
+        </nav>
+    </div>
+    <script src="{% static 'main_menu.js' %}"></script>
+</body>
+</html>

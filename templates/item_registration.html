@@ -1,0 +1,60 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物品登録 - 物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>物品登録</h1>
+        <a href="/">メインメニューに戻る</a>
+    </header>
+
+    <main>
+        <form id="item-registration-form">
+            <div class="form-group">
+                <label for="name">物品名:</label>
+                <input type="text" id="name" name="name" required>
+            </div>
+            <div class="form-group">
+                <label for="supplier">納入業者:</label>
+                <input type="text" id="supplier" name="supplier">
+                <div id="supplier-suggestions"></div>
+            </div>
+            <div class="form-group">
+                <label for="standard">規格:</label>
+                <input type="text" id="standard" name="standard">
+            </div>
+            <div class="form-group">
+                <label for="unit">単位:</label>
+                <input type="text" id="unit" name="unit">
+            </div>
+            <div class="form-group">
+                <label for="quantity_per_pack">入数:</label>
+                <input type="number" id="quantity_per_pack" name="quantity_per_pack">
+            </div>
+            <div class="form-group">
+                <label for="storage_location">保管場所:</label>
+                <input type="text" id="storage_location" name="storage_location">
+            </div>
+            <div class="form-group">
+                <label for="management_method">管理方法:</label>
+                <select id="management_method" name="management_method" required>
+                    <!-- オプションはJSで動的に読み込む -->
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="delivery_price">納入価格:</label>
+                <input type="number" step="0.01" id="delivery_price" name="delivery_price">
+            </div>
+            <button type="submit">登録</button>
+        </form>
+        <p id="message"></p>
+    </main>
+
+    <script src="{% static 'item_registration.js' %}"></script>
+</body>
+</html>

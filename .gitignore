@@ -1,0 +1,30 @@
+# Byte-code files
+*.pyc
+__pycache__/
+
+# IDE-specific files
+.idea/
+*.iml
+.vscode/
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# Database
+*.sqlite3
+
+# Virtual environment
+venv/
+env/
+
+# Logs
+*.log
+
+# Media files (user-uploaded)
+media/
+
+# Django specific
+*.pot
+*.mo
+local_settings.py

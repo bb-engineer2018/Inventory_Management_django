@@ -1,0 +1,35 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>発注入力 - 物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>発注入力</h1>
+        <a href="/">メインメニューに戻る</a>
+    </header>
+
+    <main>
+        <form id="order-entry-form">
+            <div class="form-group">
+                <label for="item-search">物品検索:</label>
+                <input type="text" id="item-search" placeholder="物品名を入力して検索" required>
+                <div id="item-suggestions"></div>
+                <input type="hidden" id="selected-item-id">
+            </div>
+            <div class="form-group">
+                <label for="order_quantity">発注数:</label>
+                <input type="number" id="order_quantity" name="order_quantity" required>
+            </div>
+            <button type="submit">発注</button>
+        </form>
+        <p id="message"></p>
+    </main>
+
+    <script src="{% static 'order_entry.js' %}"></script>
+</body>
+</html>

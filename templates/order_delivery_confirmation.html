@@ -1,0 +1,89 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>注文・納品確認 - 物品管理システム</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+</head>
+<body>
+    <header>
+        <h1>注文・納品確認</h1>
+        <a href="/">メインメニューに戻る</a>
+    </header>
+
+    <div class="container">
+        <main>
+            <!-- フィルタリング機能 -->
+            <section id="filter-section" class="card">
+                <h2>注文・納品フィルタ</h2>
+                <form id="order-filter-form">
+                    <div class="form-group">
+                        <label for="item-search">物品で絞り込み:</label>
+                        <input type="text" id="item-search" placeholder="物品名を検索">
+                        <input type="hidden" id="selected-item-id">
+                        <div id="item-suggestions" class="suggestions-box"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="start-date">期間で絞り込み:</label>
+                        <input type="date" id="start-date">
+                        <span>〜</span>
+                        <input type="date" id="end-date">
+                    </div>
+                    <div class="form-actions">
+                        <button type="submit" class="button primary">適用</button>
+                        <button type="button" id="reset-order-filters" class="button secondary">リセット</button>
+                        <button type="button" id="show-all-orders" class="button info">全部表示</button>
+                    </div>
+                </form>
+            </section>
+
+            <div class="dashboard-sections">
+                <!-- 未納品注文 -->
+                <section id="pending-orders-section" class="card">
+                    <h2>未納品注文</h2>
+                    <div class="table-responsive">
+                        <table id="pending-orders-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>物品名</th>
+                                    <th>注文日</th>
+                                    <th>注文数</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- データはJSで挿入 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <!-- 納品済み注文 -->
+                <section id="delivered-orders-section" class="card">
+                    <h2>納品済み注文</h2>
+                    <div class="table-responsive">
+                        <table id="delivered-orders-table" class="data-table">
+                            <thead>
+                                <tr>
+                                    <th>物品名</th>
+                                    <th>注文日</th>
+                                    <th>注文数</th>
+                                    <th>納品日</th>
+                                    <th>操作</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- データはJSで挿入 -->
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+            </div>
+        </main>
+    </div>
+
+    <script src="{% static 'order_delivery_confirmation.js' %}"></script>
+</body>
+</html>
