@@ -66,7 +66,7 @@
 
 2.  **仮想環境を作成します**
     ```bash
-    python3 -m venv venv
+    python -m venv venv
     ```
 
 3.  **仮想環境を有効化（activate）します**
